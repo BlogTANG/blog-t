@@ -1,0 +1,41 @@
+<div class="input-group" style="margin-bottom: 20px">
+  <input type="text" class="form-control" id="search-text" title="Search">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="submit" onclick="doSearch()">Search</button>
+  </span>
+  <script>
+    query = location.search;
+    if (query != '') {
+      params = query.substr(1).split('&');
+      for (var i = 0; i < params.length; i++) {
+        pair = params[i].split('=');
+        if (pair[0] === 'q') {
+          document.getElementById('search-text').value = decodeURI(pair[1]);
+          break;
+        }
+      }
+    }
+
+    function doSearch() {
+      const queryText = document.getElementById('search-text').value.trim();
+      if (queryText != '') {
+        location.href = '/search?q=' + queryText;
+      }
+    }
+  </script>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-body">
+    如非特别注明，本站的全部文字默认采用 <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 协议</a>，注明来源于维基百科的词条采用 <a
+          href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 协议</a>。
+  </div>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <h4>友情链接</h4>
+    <ul>
+      <li><a href="https://stdrc.cc">Project RC</a></li>
+      <li><a href="https://github.com/BlogTANG">BlogTANG</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% include 'head.html' ignore missing %}
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div id="sidebar" class="col-md-3">
+        {% include 'header.html' ignore missing %}
+        {% include 'sidebar.html' ignore missing %}
+      </div>
+      <div class="col-md-9">
+        {% block body %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' ignore missing %}
+
+<script type="text/javascript">
+  var elems = document.getElementsByTagName('a');
+  for (var i = 0; i < elems.length; i++) {
+    if (elems[i].href.indexOf(document.domain) < 0) {
+      elems[i].target = '_blank';
+    }
+  }
+
+  var navLinks = document.querySelectorAll('.nav-tabs li a');
+  for (i = 0; i < navLinks.length; i++) {
+    if (document.location.href === navLinks[i].href) {
+      navLinks[i].parentElement.classList.add('active');
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+
+<title>{{ '"' + page.query + '"' + ' - Search - ' + site.title }}</title>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="panel panel-primary">
+  <div class="panel-heading"></div>
+  <div class="panel-body markdown-body">
+    <h1>Search: "{{ page.query }}"</h1>
+    <hr>
+    <table class="table table-hover">
+      <tbody>
+      {% if page.entries %}
+      {% for entry in page.entries %}
+      <tr>
+        {% if entry.updated %}
+        <td class="text-right" style="border-top: none; width: 15%;">{{ entry.updated.strftime('%Y.%-m.%-d') }}</td>
+        {% elif entry.date %}
+        <td class="text-right" style="border-top: none; width: 15%;">{{ entry.date.strftime('%Y.%-m.%-d') }}</td>
+        {% else %}
+        <td style="border-top: none; width: 15%;"></td>
+        {% endif %}
+        <td style="border-top: none"><a href="{{ entry.url }}">{{ entry.title }}</a></td>
+      </tr>
+      {% endfor %}
+      {% else %}
+      No Results.
+      {% endif %}
+      </tbody>
+    </table>
+    {% if page.has_next or page.has_prev %}
+    <ul class="pager">
+      {% if page.has_prev %}
+      <li class="previous">
+        <a href="{{ page.prev_url }}">← Prev</a>
+      </li>
+      {% endif %}
+      {% if page.has_next %}
+      <li class="next">
+        <a href="{{ page.next_url }}">Next →</a>
+      </li>
+      {% endif %}
+    </ul>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
